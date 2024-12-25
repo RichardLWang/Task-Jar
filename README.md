@@ -52,3 +52,20 @@ literally blank.
 
 12-12-2024 [Jar] 20-12-2024
 Make a Task Entry. 
+
+## Example Jars in Richard's life
+
+I want to keep on top of my yearly goals
+
+- Academic Study
+- Workout
+- Home
+- MoodLamp
+- Coding
+- Sport
+
+## Improvements over my current To Do list
+
+- Task tracking
+- Organisation
+- Backups (Imagine accidentally deleting the whole thing and saving it)
