@@ -1,16 +1,16 @@
 19-12-2024 [Coding] 20-12-2024
 Write out the test file. 
 
-19-12-2024 [Coding] 
+19-12-2024 [Coding] n/a
 Decide what can denote the null value for the Date Completed field. 
 
 19-12-2024 [Coding] 20-12-2024
 Decide between BufferedReader or Scanner to read this txt file.
 
-19-12-2024 [Coding]
+19-12-2024 [Coding] n/a
 What is the difference between a .txt and a .data file.
 
-19-12-2024 [Coding]
+19-12-2024 [Coding] n/a
 Sub jars are a thought for the future.
 
 20-12-2024 [Reward] 20-12-2024

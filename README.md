@@ -45,7 +45,7 @@ The square brackets must always be included.
      DATE COMPLETED
 Can be written as:
 12-12-2024 OR
-literally blank. 
+n/a. 
 
 
 ## Example Task Entry
