@@ -5,7 +5,8 @@ Write out the test file.
 Decide what can denote the null value for the Date Completed field. 
 
 19-12-2024 [Coding] 20-12-2024
-Decide between BufferedReader or Scanner to read this txt file.
+Decide between BufferedReader or Scanner to read this txt file. 
+Solution: Scanner has more methods and the txt file won't be big enough to realise the better performance of BufferedReader. 
 
 19-12-2024 [Coding] n/a
 What is the difference between a .txt and a .data file.
@@ -13,5 +14,5 @@ What is the difference between a .txt and a .data file.
 19-12-2024 [Coding] n/a
 Sub jars are a thought for the future.
 
-20-12-2024 [Reward] 20-12-2024
-Go to the post office to collect parcels. 
+1-1-2025 [Coding] n/a
+What is Java GUI. How to make it look like a smart phone app.

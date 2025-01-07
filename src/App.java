@@ -11,5 +11,8 @@ public class App {
             System.out.println(task.toString());
             System.out.println();
         }
+
+        new TaskListPanel(tasks);
+
     }
 }
