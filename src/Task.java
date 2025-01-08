@@ -11,6 +11,24 @@ public class Task {
         this.description = description;
     }
 
+    // Getter methods
+    public String getDate() {
+        return date;
+    }
+ 
+    public String getCategory() {
+        return category;
+    }
+ 
+    public String getDateCompleted() {
+        return dateCompleted;
+    }
+ 
+    public String getDescription() {
+        return description;
+    }
+    
+
     
     public String toString() {
         String completionDate = (dateCompleted == null) ? "n/a" : dateCompleted;

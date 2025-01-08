@@ -16,3 +16,22 @@ Sub jars are a thought for the future.
 
 1-1-2025 [Coding] n/a
 What is Java GUI. How to make it look like a smart phone app.
+
+8-1-2025 [Coding] n/a
+WHat is a good design pattern for this program. MVVM (Model-View-ViewModel) apparently.
+
+8-1-2025 [Coding] 8-1-2025
+Here are my problems so far with this program.
+1.
+The task and its components are all being shown on one line extending past the width of the JFrame. 
+2.
+This in turn makes the program side scroll to view the rest of the task that is beyond the width of the JFrame.
+3.
+The program isn't able to vertically scroll. I want each individual task to be within their own task panel. All tasks are currently being squished within the height of the JFrame.
+4.
+I want all the tasks and their contents contained within the width of the jframe and other tasks to extend vertically below the height(beyond the y of the Jframe).
+It should only be vertically scrollable.
+
+8-1-2025 [Coding] n/a
+Now there's another problem of the task description only being able to be displayed within the boundaries of the task panel. 
+The task panel doesn't resize. 
