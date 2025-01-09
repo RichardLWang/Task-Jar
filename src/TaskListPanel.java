@@ -18,6 +18,7 @@ import javax.swing.JLabel;
 
 public class TaskListPanel extends JFrame {
     private List<Task> tasks;
+    private int taskListPanelWidth = 720;
     
     // Takes a list of tasks and displays them 
     public TaskListPanel(List<Task> tasks) {
@@ -27,7 +28,7 @@ public class TaskListPanel extends JFrame {
         this.setTitle("Task Jar");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
         // this.setResizable(false);  // Prevents resizing
-        this.setSize(720,900); // x & y dimension of frame    
+        this.setSize(taskListPanelWidth,900); // x & y dimension of frame/window 
         this.getContentPane().setBackground(new Color(255, 0, 255)); // Background colour
         this.setVisible(true);  // Makes a frame visible    
 
@@ -44,7 +45,7 @@ public class TaskListPanel extends JFrame {
         for (Task task : tasks) {
             JPanel taskPanel = createTaskPanel(task);
             // Make task panel take full width
-            taskPanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, taskPanel.getMaximumSize().height));
+            taskPanel.setMaximumSize(new Dimension(taskListPanelWidth - 60, taskPanel.getMaximumSize().height));
             mainPanel.add(taskPanel);
             mainPanel.add(Box.createRigidArea(new Dimension(0, 10)));
         }
@@ -54,6 +55,8 @@ public class TaskListPanel extends JFrame {
         // I only want to scroll vertically
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER); 
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        
+        scrollPane.getVerticalScrollBar().setUnitIncrement(15); // Scroll Speed
 
         // Add scroll pane to frame
         this.add(scrollPane);
@@ -66,7 +69,8 @@ public class TaskListPanel extends JFrame {
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         panel.setBorder(BorderFactory.createLineBorder(Color.GRAY));  // Visible border for the tasks
         
-        // Create metadata panel (date, category, completion date)
+
+        // METADATA PANEL (date, category, completion date)
         JPanel metadataPanel = new JPanel();
         metadataPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
         // Format the metadata string
@@ -74,7 +78,8 @@ public class TaskListPanel extends JFrame {
         String metadata = String.format("%s [%s] %s", task.getDate(), task.getCategory(), completionDate);
         metadataPanel.add(new JLabel(metadata));
         
-        // Create description panel
+
+        // DESCRIPTION PANEL
         JPanel descriptionPanel = new JPanel();
         descriptionPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
         // Add description with word wrap
@@ -85,7 +90,8 @@ public class TaskListPanel extends JFrame {
         descriptionArea.setBackground(panel.getBackground());
 
         // Set preferred size to control width
-        descriptionArea.setPreferredSize(new Dimension(700, 50));
+        descriptionArea.setPreferredSize(new Dimension(taskListPanelWidth - 80, // The panel height shuold be dictated by the size of the description.
+            (task.getDescription().length() > 100) ? (task.getDescription().length())/3 : 25)); 
         descriptionPanel.add(descriptionArea);
         
         // Add both panels
