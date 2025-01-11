@@ -76,7 +76,9 @@ public class TaskListPanel extends JFrame {
         // Format the metadata string
         String completionDate = (task.getDateCompleted() == null) ? "n/a" : task.getDateCompleted();
         String metadata = String.format("%s [%s] %s", task.getDate(), task.getCategory(), completionDate);
-        metadataPanel.add(new JLabel(metadata));
+        JLabel metadataLabel = new JLabel(metadata);
+        metadataLabel.setFont(new Font("Arial", Font.BOLD, 16)); // Font name, style, size
+        metadataPanel.add(metadataLabel);
         
 
         // DESCRIPTION PANEL
@@ -89,9 +91,10 @@ public class TaskListPanel extends JFrame {
         descriptionArea.setEditable(false);
         descriptionArea.setBackground(panel.getBackground());
 
-        // Set preferred size to control width
+        // TASK PANEL SIZE
         descriptionArea.setPreferredSize(new Dimension(taskListPanelWidth - 80, // The panel height shuold be dictated by the size of the description.
             (task.getDescription().length() > 100) ? (task.getDescription().length())/3 : 25)); 
+        descriptionArea.setFont(new Font("Arial", Font.PLAIN, 16));    
         descriptionPanel.add(descriptionArea);
         
         // Add both panels

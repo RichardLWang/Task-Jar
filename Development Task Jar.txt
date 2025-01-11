@@ -1,24 +1,17 @@
-19-12-2024 [Coding] 20-12-2024
-Write out the test file. 
+11-1-2025 [Coding] n/a 
+Font size should be made a variable so that the size of the description area can be multipled by it so that the description can fit in the box.
 
-19-12-2024 [Coding] n/a
-Decide what can denote the null value for the Date Completed field. 
+11-1-2025 [Coding] 11-1-2025
+Able to change the font of the metadata and description.
 
-19-12-2024 [Coding] 20-12-2024
-Decide between BufferedReader or Scanner to read this txt file. 
-Solution: Scanner has more methods and the txt file won't be big enough to realise the better performance of BufferedReader. 
+11-1-2025 [Coding] 11-1-2025 
+Reversed the order tasks within the txt file so that upon opening the txt file the most recent tasks will be at the top instead of at the bottom. 
+Also alleviates the problem of completed tasks from aons ago being the first thing one sees. This is how I should have done my DONE.txt list instead of always scrolling down to add completed tasks.
 
-19-12-2024 [Coding] n/a
-What is the difference between a .txt and a .data file.
-
-19-12-2024 [Coding] n/a
-Sub jars are a thought for the future.
-
-1-1-2025 [Coding] n/a
-What is Java GUI. How to make it look like a smart phone app.
-
-8-1-2025 [Coding] n/a
-WHat is a good design pattern for this program. MVVM (Model-View-ViewModel) apparently.
+8-1-2025 [Coding] 9-1-2025
+Now there's another problem of the task description only being able to be displayed within the boundaries of the task panel. 
+The task panel doesn't resize.
+Solution: Narrowed it down to descriptionArea.setPreferredSize and put in a min condition and a formula. The formula doesn't account for really packed descriptions as they will have a bigger space below.
 
 8-1-2025 [Coding] 8-1-2025
 Here are my problems so far with this program.
@@ -33,5 +26,23 @@ I want all the tasks and their contents contained within the width of the jframe
 It should only be vertically scrollable.
 
 8-1-2025 [Coding] n/a
-Now there's another problem of the task description only being able to be displayed within the boundaries of the task panel. 
-The task panel doesn't resize. 
+WHat is a good design pattern for this program. MVVM (Model-View-ViewModel) apparently.
+
+1-1-2025 [Coding] n/a
+What is Java GUI. How to make it look like a smart phone app.
+
+19-12-2024 [Coding] n/a
+Sub jars are a thought for the future.
+
+19-12-2024 [Coding] n/a
+What is the difference between a .txt and a .data file.
+
+19-12-2024 [Coding] 20-12-2024
+Decide between BufferedReader or Scanner to read this txt file. 
+Solution: Scanner has more methods and the txt file won't be big enough to realise the better performance of BufferedReader. 
+
+19-12-2024 [Coding] n/a
+Decide what can denote the null value for the Date Completed field. n/a is too hard to type out.
+
+19-12-2024 [Coding] 20-12-2024
+Write out the test file.
