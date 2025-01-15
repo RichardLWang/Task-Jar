@@ -33,7 +33,7 @@ public class FileHandler {
                 String[] parts = line.split("\\s+", 3);  // Split into date, category, dateCompleted
                 date = parts[0];
                 category = parts[1].replaceAll("[\\[\\]]", "");  // Remove brackets
-                dateCompleted = parts[2].equals("n/a") ? null : parts[2];
+                dateCompleted = parts[2].equals("-") ? null : parts[2];
             } else {
                 // It's a description line
                 taskDescription.append(line).append("\n");

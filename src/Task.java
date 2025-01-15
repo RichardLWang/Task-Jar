@@ -30,8 +30,8 @@ public class Task {
     
 
     
-    public String toString() {
-        String completionDate = (dateCompleted == null) ? "n/a" : dateCompleted;
+    public String toString() {  //Curently just printing out to the console but not to the program window
+        String completionDate = (dateCompleted == null) ? "NOT COMPLETE" : dateCompleted;
         return String.format("%s [%s] %s%n%s", 
             date, 
             category, 
