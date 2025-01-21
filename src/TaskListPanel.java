@@ -1,14 +1,17 @@
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.LayoutManager;
 import java.util.List;
 import java.awt.Font;
+import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
+import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -17,8 +20,11 @@ import javax.swing.JLabel;
 
 
 public class TaskListPanel extends JFrame {
+
     private List<Task> tasks;
-    private int taskListPanelWidth = 720;
+    private int frameWidth = 720;
+    private int frameHeight = 900;
+    JButton taskOrderToggle;
     
     // Takes a list of tasks and displays them 
     public TaskListPanel(List<Task> tasks) {
@@ -28,11 +34,32 @@ public class TaskListPanel extends JFrame {
         this.setTitle("Task Jar");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
         // this.setResizable(false);  // Prevents resizing
-        this.setSize(taskListPanelWidth,900); // x & y dimension of frame/window 
-        this.getContentPane().setBackground(new Color(255, 0, 255)); // Background colour
+        this.setSize(frameWidth, frameHeight); // x & y dimension of frame/window 
+        this.getContentPane().setBackground(Color.MAGENTA); // Background colour
         this.setVisible(true);  // Makes a frame visible    
+        this.setLayout(new BorderLayout());
 
-        
+        // Button to toggle order of tasks
+        taskOrderToggle = new JButton();
+		// taskOrderToggle.setBounds(500, 500, 10, 10);  
+        taskOrderToggle.addActionListener(e -> System.out.println("Poo"));
+        taskOrderToggle.setText("FIFO/LIFO");
+        taskOrderToggle.setFocusable(false); 
+        taskOrderToggle.setFont(new Font("Comic Sans",Font.BOLD,25));
+        taskOrderToggle.setForeground(Color.green);
+
+        // Panel to hold taskOrderToggle button
+        JPanel buttonPanel = new JPanel(); 
+        buttonPanel.setLayout(new FlowLayout(FlowLayout.RIGHT, 0, 0)); // component orientation, horizontal gap, vertical gap
+        buttonPanel.setBackground(Color.green);
+
+        // Add some padding/margin on the right
+        buttonPanel.add(Box.createHorizontalStrut(10));  // Left margin
+        buttonPanel.add(taskOrderToggle);
+        buttonPanel.add(Box.createHorizontalStrut(10));  // Right margin
+        // Optional: add some vertical padding
+        buttonPanel.setBorder(BorderFactory.createEmptyBorder(5, 0, 5, 0));  // top, left, bottom, right
+                
         // JAVA TRICK: the this keyword is not necessary as the methods are of the class.
         // The above would be referring to the current JFrame object.
 
@@ -45,7 +72,7 @@ public class TaskListPanel extends JFrame {
         for (Task task : tasks) {
             JPanel taskPanel = createTaskPanel(task);
             // Make task panel take full width
-            taskPanel.setMaximumSize(new Dimension(taskListPanelWidth - 60, taskPanel.getMaximumSize().height));
+            taskPanel.setMaximumSize(new Dimension(frameWidth - 60, taskPanel.getMaximumSize().height));
             mainPanel.add(taskPanel);
             mainPanel.add(Box.createRigidArea(new Dimension(0, 10)));
         }
@@ -58,10 +85,11 @@ public class TaskListPanel extends JFrame {
         
         scrollPane.getVerticalScrollBar().setUnitIncrement(15); // Scroll Speed
 
-        // Add scroll pane to frame
-        this.add(scrollPane);
+
+        // this.add(scrollPane);
+        this.add(scrollPane, BorderLayout.CENTER);
+        this.add(buttonPanel, BorderLayout.SOUTH);
         
-    
     }
 
     private JPanel createTaskPanel(Task task) {
@@ -92,7 +120,7 @@ public class TaskListPanel extends JFrame {
         descriptionArea.setBackground(panel.getBackground());
 
         // TASK PANEL SIZE
-        descriptionArea.setPreferredSize(new Dimension(taskListPanelWidth - 80, // The panel height shuold be dictated by the size of the description.
+        descriptionArea.setPreferredSize(new Dimension(frameWidth - 80, // The panel height shuold be dictated by the size of the description.
             (task.getDescription().length() > 100) ? (task.getDescription().length())/3 : 25)); 
         descriptionArea.setFont(new Font("Arial", Font.PLAIN, 16));    
         descriptionPanel.add(descriptionArea);

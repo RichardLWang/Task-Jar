@@ -7,12 +7,14 @@ I'm just gonna use a -.
 
 15-1-2025 [Coding] -
 Tasks without a Date Completed should be sorted to the top. These tasks without a completion date can be sorted via a LIFO(Recent Tasks)/FIFO(Late Tasks) button. 
+A JPanel with a flow layout holds the button in the south border of the main panel.
 
 15-1-2025 [Coding] 15-1-2025
 Can the fields of Task be expanded? It might just be best to keep it simple for now. Incorporating something like the builder pattern would make Task Jar too complex and beyond the idea of a simple jar.
 
 11-1-2025 [Coding] - 
 Font size should be made a variable so that the size of the description area can be multipled by it so that the description can fit in the box.
+Maybe I can use width and height keywords like in Processing.
 
 11-1-2025 [Coding] 11-1-2025
 Able to change the font of the metadata and description.
