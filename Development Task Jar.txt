@@ -1,18 +1,28 @@
+22-1-2025 [Coding] -
+There is an issue of sorting the 8-1-2025 good design pattern task. 
+
+22-1-2025 [Coding] 22-1-2025
+Figure out how to sort the tasks by date completed by getting a list. The panel will have to be refreshed everytime task order button is hit. 
+
 15-1-2025 [Coding] 15-1-2025
 Get rid the placeholder n/a for Date Completed. 
 I'm guessing if there's a bunch of empty spaces it'll just be part of the String.
 It's either empty or has a date. Then move onto the next line for the task description.
 If I get rid of n/a means null then how do I know which tasks need completing?
-I'm just gonna use a -.
+I'm just gonna use a -. It shouldn't be followed by anything else like a space. Otherwise date completed won't be read as null. 
 
 15-1-2025 [Coding] -
 Tasks without a Date Completed should be sorted to the top. These tasks without a completion date can be sorted via a LIFO(Recent Tasks)/FIFO(Late Tasks) button. 
+The uncompleted tasks should be sorted by date. 
 A JPanel with a flow layout holds the button in the south border of the main panel.
+
+22-1-2025 [Coding] -
+Completed tasks should get their backgrounds coloured. 
 
 15-1-2025 [Coding] 15-1-2025
 Can the fields of Task be expanded? It might just be best to keep it simple for now. Incorporating something like the builder pattern would make Task Jar too complex and beyond the idea of a simple jar.
 
-11-1-2025 [Coding] - 
+11-1-2025 [Coding] -
 Font size should be made a variable so that the size of the description area can be multipled by it so that the description can fit in the box.
 Maybe I can use width and height keywords like in Processing.
 
