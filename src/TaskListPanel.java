@@ -120,7 +120,7 @@ public class TaskListPanel extends JFrame {
 
         // TASK PANEL SIZE
         descriptionArea.setPreferredSize(new Dimension(frameWidth - 80, // The panel height shuold be dictated by the size of the description.
-            (task.getDescription().length() > 100) ? (task.getDescription().length())/3 : 25)); 
+            (task.getDescription().length() > 100) ? (task.getDescription().length())/2 : 40)); 
         descriptionArea.setFont(new Font("Arial", Font.PLAIN, 16));    
         descriptionPanel.add(descriptionArea);
         

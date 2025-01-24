@@ -15,13 +15,6 @@ public class App {
         // });
         new TaskListPanel(tasks).setVisible(true);  
 
-        
-
-        for (Task task : tasks) {
-            System.out.println(task.toString());
-            System.out.println();
-        }
-
         // new TaskListPanel(tasks);
 
     }

@@ -16,9 +16,10 @@ public class TaskListModel {
      }
 
      private String reverseDateFormat(String date) {
-          // Remove dashes and reverse from DD-MM-YYYY to YYYYMMDD
           String[] parts = date.split("-");
-          return parts[2] + parts[1] + parts[0];
+          String day = parts[0].length() == 1 ? "0" + parts[0] : parts[0];  // Puts a 0 in front if a singular date digit is in front
+          String month = parts[1].length() == 1 ? "0" + parts[1] : parts[1];
+          return parts[2] + month + day;
      }
 
      public void toggleFIFOLIFO() {
@@ -34,6 +35,7 @@ public class TaskListModel {
                }
           }
           
+          // Sorts the incompleteTasks by date
           Collections.sort(incompleteTasks, (task1, task2) -> {
                String date1 = reverseDateFormat(task1.getDate());
                String date2 = reverseDateFormat(task2.getDate());

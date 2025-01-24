@@ -1,5 +1,13 @@
+24-1-2025 [Coding] -
+Figure out how to start editing tasks. Checkbox for completion and task description edit.
+
 22-1-2025 [Coding] -
+- Look at the structure of MileStone 2 and adapt to my Task Catergory Counter program
+- Creating Task Jar will allow me to see my progress
+
+22-1-2025 [Coding] 24-1-2025
 There is an issue of sorting the 8-1-2025 good design pattern task. 
+Solution was that the date format wasn't consistent. 
 
 22-1-2025 [Coding] 22-1-2025
 Figure out how to sort the tasks by date completed by getting a list. The panel will have to be refreshed everytime task order button is hit. 
