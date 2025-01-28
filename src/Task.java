@@ -27,6 +27,12 @@ public class Task {
     public String getDescription() {
         return description;
     }
+
+
+    // Setter method for task edits
+    public void setDescription(String description) {
+        this.description = description;
+    }
     
 
     

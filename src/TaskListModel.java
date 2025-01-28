@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+// The TaskListModel contains the methods to manipulate the tasks
 public class TaskListModel {
      private List<Task> tasks;
      private boolean isFIFO = true;  // true for FIFO, false for LIFO

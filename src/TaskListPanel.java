@@ -3,9 +3,13 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.LayoutManager;
+import java.util.Arrays;
 import java.util.List;
 import java.awt.Font;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.io.IOException;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -16,20 +20,24 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.border.Border;
+
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
-
+// The TaskListPanel is the Graphical User Interface
 public class TaskListPanel extends JFrame {
 
     private TaskListModel taskModel;
     private JPanel mainPanel;
-    // private List<Task> tasks;
+    private JPanel buttonPanel;
+    private Task currentEditingTask = null;  // Keep track of which task is being edited
+    private JTextArea currentEditingArea = null;  // Keep track of which text area is being edited
+    private JButton saveButton;  // The save button that will appear when editing
     private int frameWidth = 720;
     private int frameHeight = 900;
     
     // Takes a list of tasks and displays them 
     public TaskListPanel(List<Task> tasks) {
-        // this.tasks = tasks;
         taskModel = new TaskListModel(tasks);
 
         // Frame setup
@@ -49,31 +57,19 @@ public class TaskListPanel extends JFrame {
         // Use vertical BoxLayout to stack tasks
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
 
-        // // Add each task as a panel
-        // for (Task task : tasks) {
-        //     JPanel taskPanel = createTaskPanel(task);
-        //     // Make task panel take full width
-        //     taskPanel.setMaximumSize(new Dimension(frameWidth - 60, taskPanel.getMaximumSize().height));
-        //     mainPanel.add(taskPanel);
-        //     mainPanel.add(Box.createRigidArea(new Dimension(0, 10)));
-        // }
+        buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        buttonPanel.add(createTaskOrderToggleButton());
+        saveButton = createSaveButton();
 
         displayTasks();
         
-        // Scroll capability: The tasks within the mainPanel will be put inside a scroll pane
-        JScrollPane scrollPane = new JScrollPane(mainPanel);
-        // I only want to scroll vertically
-        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER); 
-        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-        
-        scrollPane.getVerticalScrollBar().setUnitIncrement(15); // Scroll Speed
 
-
-        this.add(scrollPane); // The default is already the centre of the border layout?
-        //this.add(scrollPane, BorderLayout.CENTER);
-        this.add(createTaskOrderToggleButton(), BorderLayout.SOUTH); // This button panel takes the south border. 
+        this.add(createScrollPane(mainPanel)); // The default is already the centre of the border layout (scrollPane, BorderLayout.CENTER)?
+        this.add(buttonPanel, BorderLayout.SOUTH);
+        // this.add(createTaskOrderToggleButton(), BorderLayout.SOUTH); // This button panel takes the south border. 
         
     }
+
 
 
 
@@ -87,6 +83,7 @@ public class TaskListPanel extends JFrame {
             mainPanel.add(taskPanel);
             mainPanel.add(Box.createRigidArea(new Dimension(0, 10)));
         }
+        
         mainPanel.revalidate();
         mainPanel.repaint();
     }
@@ -120,10 +117,20 @@ public class TaskListPanel extends JFrame {
 
         // TASK PANEL SIZE
         descriptionArea.setPreferredSize(new Dimension(frameWidth - 80, // The panel height shuold be dictated by the size of the description.
-            (task.getDescription().length() > 100) ? (task.getDescription().length())/2 : 40)); 
+            (task.getDescription().length() > 100) ? (task.getDescription().length())/2 : 100)); 
         descriptionArea.setFont(new Font("Arial", Font.PLAIN, 16));    
         descriptionPanel.add(descriptionArea);
         
+        // Add click listener to description area
+        descriptionArea.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (!descriptionArea.isEditable()) {  // Only respond if not already editing
+                    startEditing(task, descriptionArea);
+                }
+            }
+        });
+
         // Add both panels
         panel.add(metadataPanel);
         panel.add(descriptionPanel);
@@ -131,12 +138,84 @@ public class TaskListPanel extends JFrame {
         return panel;
     }
 
+    private void startEditing(Task task, JTextArea area) {
+        // If already editing something else, save it first
+        if (currentEditingTask != null) {
+            saveTaskChanges();
+        }
+        
+        // Set up new editing session
+        currentEditingTask = task;
+        currentEditingArea = area;
+        area.setEditable(true);
+        area.setBackground(new Color(255, 255, 200));  // Light yellow to indicate editing
+        
+        // Add save button if not already there
+        if (!Arrays.asList(buttonPanel.getComponents()).contains(saveButton)) {
+            buttonPanel.add(saveButton);
+            buttonPanel.revalidate();
+            buttonPanel.repaint();
+        }
+    }
+
+    private JScrollPane createScrollPane(JPanel scrollablePanel) {
+        // Scroll capability: The tasks within the mainPanel will be put inside a scroll pane
+        JScrollPane scrollPane = new JScrollPane(scrollablePanel);
+        // I only want to scroll vertically
+        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER); 
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        
+        scrollPane.getVerticalScrollBar().setUnitIncrement(15); // Scroll Speed
+
+        return scrollPane;
+    }
+
+    private JButton createSaveButton() {
+        JButton saveButton = new JButton("Task Save");
+        saveButton.setFocusable(false); 
+        saveButton.setFont(new Font("Comic Sans", Font.BOLD, 25));
+        saveButton.setForeground(Color.red);
+
+        buttonPanel.setBackground(Color.green);
+
+        saveButton.addActionListener(e -> saveTaskChanges());
+        return saveButton;
+    }
+
+    private void saveTaskChanges() {
+        if (currentEditingTask != null && currentEditingArea != null) {
+            // Update the task's description
+            String newDescription = currentEditingArea.getText();
+            currentEditingTask.setDescription(newDescription);  // You'll need to add this method to Task class
+            
+            // Update the file
+            try {
+                FileHandler.writeTasks(taskModel.getTasks(), "Development Task Jar.txt");
+            } catch (IOException ex) {
+                // Show error message to user
+                JOptionPane.showMessageDialog(this, 
+                    "Error saving changes: " + ex.getMessage(), 
+                    "Save Error", 
+                    JOptionPane.ERROR_MESSAGE);
+            }
+            
+            // Reset editing state
+            currentEditingArea.setEditable(false);
+            currentEditingArea.setBackground(null);  // Reset background color
+            buttonPanel.remove(saveButton);
+            buttonPanel.revalidate();
+            buttonPanel.repaint();
+            
+            currentEditingTask = null;
+            currentEditingArea = null;
+        }
+    }
+
     private JPanel createTaskOrderToggleButton() {
-        // Button to toggle order of tasks
         JButton taskOrderToggle = new JButton();
 		// taskOrderToggle.setBounds(500, 500, 10, 10);  
 
-        // taskOrderToggle.addActionListener(e -> System.out.println("Poo"));
+        // Use a lambda instead of implementing Action Listener
         taskOrderToggle.addActionListener(e -> {
             taskModel.toggleFIFOLIFO();
             displayTasks();

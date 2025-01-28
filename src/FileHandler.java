@@ -1,5 +1,8 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -49,5 +52,16 @@ public class FileHandler {
         return tasks;
     }
 
+
+    public static void writeTasks(List<Task> tasks, String filePath) throws IOException {
+        try (PrintWriter writer = new PrintWriter(new FileWriter(filePath))) {
+            for (Task task : tasks) {
+                String completionDate = task.getDateCompleted() == null ? "-" : task.getDateCompleted();
+                writer.printf("%s [%s] %s%n", task.getDate(), task.getCategory(), completionDate);
+                writer.println(task.getDescription());
+                writer.println();  // Blank line between tasks
+            }
+        }
+    }
     
 }
