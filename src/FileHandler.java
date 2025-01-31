@@ -52,7 +52,6 @@ public class FileHandler {
         return tasks;
     }
 
-
     public static void writeTasks(List<Task> tasks, String filePath) throws IOException {
         try (PrintWriter writer = new PrintWriter(new FileWriter(filePath))) {
             for (Task task : tasks) {

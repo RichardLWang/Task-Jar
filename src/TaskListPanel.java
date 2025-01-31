@@ -52,22 +52,17 @@ public class TaskListPanel extends JFrame {
         // JAVA TRICK: the this keyword is not necessary as the methods are of the class.
         // The above would be referring to the current JFrame object.
 
-        // Create main panel with vertical BoxLayout
         mainPanel = new JPanel();
-        // Use vertical BoxLayout to stack tasks
-        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS)); // Use vertical BoxLayout to stack tasks
 
-        buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        buttonPanel = new JPanel(new FlowLayout(FlowLayout.LEFT)); // Buttons added to the left
         buttonPanel.add(createTaskOrderToggleButton());
         saveButton = createSaveButton();
 
         displayTasks();
         
-
         this.add(createScrollPane(mainPanel)); // The default is already the centre of the border layout (scrollPane, BorderLayout.CENTER)?
-        this.add(buttonPanel, BorderLayout.SOUTH);
-        // this.add(createTaskOrderToggleButton(), BorderLayout.SOUTH); // This button panel takes the south border. 
-        
+        this.add(buttonPanel, BorderLayout.SOUTH);  // Button Panel goes on the south border.         
     }
 
 
@@ -138,26 +133,6 @@ public class TaskListPanel extends JFrame {
         return panel;
     }
 
-    private void startEditing(Task task, JTextArea area) {
-        // If already editing something else, save it first
-        if (currentEditingTask != null) {
-            saveTaskChanges();
-        }
-        
-        // Set up new editing session
-        currentEditingTask = task;
-        currentEditingArea = area;
-        area.setEditable(true);
-        area.setBackground(new Color(255, 255, 200));  // Light yellow to indicate editing
-        
-        // Add save button if not already there
-        if (!Arrays.asList(buttonPanel.getComponents()).contains(saveButton)) {
-            buttonPanel.add(saveButton);
-            buttonPanel.revalidate();
-            buttonPanel.repaint();
-        }
-    }
-
     private JScrollPane createScrollPane(JPanel scrollablePanel) {
         // Scroll capability: The tasks within the mainPanel will be put inside a scroll pane
         JScrollPane scrollPane = new JScrollPane(scrollablePanel);
@@ -168,47 +143,6 @@ public class TaskListPanel extends JFrame {
         scrollPane.getVerticalScrollBar().setUnitIncrement(15); // Scroll Speed
 
         return scrollPane;
-    }
-
-    private JButton createSaveButton() {
-        JButton saveButton = new JButton("Task Save");
-        saveButton.setFocusable(false); 
-        saveButton.setFont(new Font("Comic Sans", Font.BOLD, 25));
-        saveButton.setForeground(Color.red);
-
-        buttonPanel.setBackground(Color.green);
-
-        saveButton.addActionListener(e -> saveTaskChanges());
-        return saveButton;
-    }
-
-    private void saveTaskChanges() {
-        if (currentEditingTask != null && currentEditingArea != null) {
-            // Update the task's description
-            String newDescription = currentEditingArea.getText();
-            currentEditingTask.setDescription(newDescription);  // You'll need to add this method to Task class
-            
-            // Update the file
-            try {
-                FileHandler.writeTasks(taskModel.getTasks(), "Development Task Jar.txt");
-            } catch (IOException ex) {
-                // Show error message to user
-                JOptionPane.showMessageDialog(this, 
-                    "Error saving changes: " + ex.getMessage(), 
-                    "Save Error", 
-                    JOptionPane.ERROR_MESSAGE);
-            }
-            
-            // Reset editing state
-            currentEditingArea.setEditable(false);
-            currentEditingArea.setBackground(null);  // Reset background color
-            buttonPanel.remove(saveButton);
-            buttonPanel.revalidate();
-            buttonPanel.repaint();
-            
-            currentEditingTask = null;
-            currentEditingArea = null;
-        }
     }
 
     private JPanel createTaskOrderToggleButton() {
@@ -242,6 +176,66 @@ public class TaskListPanel extends JFrame {
         return buttonPanel;
     }
 
+    private JButton createSaveButton() {
+        JButton saveButton = new JButton("Task Save");
+        saveButton.setFocusable(false); 
+        saveButton.setFont(new Font("Comic Sans", Font.BOLD, 25));
+        saveButton.setForeground(Color.red);
 
+        buttonPanel.setBackground(Color.green);
+
+        saveButton.addActionListener(e -> saveTaskChanges());
+        return saveButton;
+    }
+
+    
+    private void startEditing(Task task, JTextArea area) {
+        // If already editing something else, save it first
+        if (currentEditingTask != null) {
+            saveTaskChanges();
+        }
+        
+        // Set up new editing session
+        currentEditingTask = task;
+        currentEditingArea = area;
+        area.setEditable(true);
+        area.setBackground(new Color(255, 255, 200));  // Light yellow to indicate editing
+        
+        // Add save button if not already there
+        if (!Arrays.asList(buttonPanel.getComponents()).contains(saveButton)) {
+            buttonPanel.add(saveButton);
+            buttonPanel.revalidate();
+            buttonPanel.repaint();
+        }
+    }
+
+    private void saveTaskChanges() {
+        if (currentEditingTask != null && currentEditingArea != null) {
+            // Update the task's description
+            String newDescription = currentEditingArea.getText();
+            currentEditingTask.setDescription(newDescription);  // You'll need to add this method to Task class
+            
+            // Update the file
+            try {
+                FileHandler.writeTasks(taskModel.getTasks(), "Development Task Jar.txt");
+            } catch (IOException ex) {
+                // Show error message to user
+                JOptionPane.showMessageDialog(this, 
+                    "Error saving changes: " + ex.getMessage(), 
+                    "Save Error", 
+                    JOptionPane.ERROR_MESSAGE);
+            }
+            
+            // Reset editing state
+            currentEditingArea.setEditable(false);
+            currentEditingArea.setBackground(null);  // Reset background color
+            buttonPanel.remove(saveButton);
+            buttonPanel.revalidate();
+            buttonPanel.repaint();
+            
+            currentEditingTask = null;
+            currentEditingArea = null;
+        }
+    }
 
 }

@@ -1,21 +1,27 @@
-28-1-2025 [Coding] -
-Task description editing is not to my liking.
-The area is not expanding down as I type so I can't see what I'm typing on the lines further down.
+31-1-2025 [Coding] -
+How tasks are sorted for display.
+
+31-1-2025 [Coding] -
+I want task editing to be locked to one task until the task save button is hit.
 
 28-1-2025 [Coding] -
 The tasks within the txt file are being saved by the order of the FIFO/LIFO button. I don't think it should be saved like this for performance reasons.
+
+28-1-2025 [Coding] -
+Task description editing is not to my liking.
+The area is not expanding down as I type so I can't see what I'm typing on the lines further down.
 
 24-1-2025 [Coding] -
 Figure out how to start editing tasks. Checkbox for completion and task description edit. Why is the area of this task so big?
 
 22-1-2025 [Coding] -
+- Look at the structure of MileStone 2 and adapt to my Task Catergory Counter program
+- Creating Task Jar will allow me to see my progress. The TaskListModel class will allow for these manipulations.
+
+22-1-2025 [Coding] -
 Checkbox for task completion to be placed on the top right of the task panel.
 Upon clicking it a completion date will be generated for the task.
 Completed tasks should get their backgrounds coloured.
-
-22-1-2025 [Coding] -
-- Look at the structure of MileStone 2 and adapt to my Task Catergory Counter program
-- Creating Task Jar will allow me to see my progress. The TaskListModel class will allow for these manipulations.
 
 15-1-2025 [Coding] -
 Tasks without a Date Completed should be sorted to the top. These tasks without a completion date can be sorted via a LIFO (Recent Tasks) / FIFO (Late Tasks) button. 
@@ -33,10 +39,10 @@ WHat is a good design pattern for this program. MVVM (Model-View-ViewModel) appa
 What is Java GUI. How to make it look like a smart phone app. It already looks the part. Actually taking it to a smartphone would be next level. Just check this task off when you accomplish I can't see beyond the inital text boxxxx argh. I'm typing th e blind Figure out how to add the checkbox for completion at the top right
 
 19-12-2024 [Coding] -
-What is the difference between a .txt and a .data file.
+Sub jars are a thought for the future.
 
 19-12-2024 [Coding] -
-Sub jars are a thought for the future.
+What is the difference between a .txt and a .data file.
 
 22-1-2025 [Coding] 24-1-2025
 There is an issue of sorting the 8-1-2025 good design pattern task. 

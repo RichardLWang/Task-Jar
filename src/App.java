@@ -9,13 +9,7 @@ public class App {
 
         List<Task> tasks = FileHandler.readTasks(DATA_DIR);
 
-        // SwingUtilities.invokeLater(() -> {
-        //         TaskListPanel gui = new TaskListPanel(tasks);
-        //         gui.setVisible(true);
-        // });
         new TaskListPanel(tasks).setVisible(true);  
-
-        // new TaskListPanel(tasks);
 
     }
 }
