@@ -1,5 +1,21 @@
 31-1-2025 [Coding] -
-How tasks are sorted for display.
+I've run into the dilemma of wanting every task to have a unique primary identifier. I've been recommended a Unix timestamp. 
+I reckon I should change the date completed to a unix timestamp. At this point I think this txt file might start becoming not human readable.
+It would be good to have these Unix timestamps because they can be used in the future indicate at which times tasks are created and completed.
+This looks good: 31-1-2025 [Coding] - <created:1706729400000> <completed:->
+Task description here.
+NAH I'm gonna be using 24 hour time. I still want the txt to be human readable or maybe I can keep using unix timestamps alongside 24hour?
+
+31-1-2025 [Coding] -
+How are tasks sorted for display.
+
+31-1-2025 [Coding] 31-1-2025 
+How are tasks saved?
+1. descriptionArea has a mouse listener to see if the JTextArea is editable.
+2. The descriptionArea is set to be editable and the background colour changed to indicate that. The save button also appears. 
+3. Clicking off the descriptionArea or clicking the save button will trigger the saveTaskChanges() function. 
+4. I've discovered that the writeTasks() function completely overwrites the txt file with the copy from TaskListPanel. 
+I can't believe I dived this deep and finally the notion of having a unique primary identifier popped into my head as there's no way each task can be identified.
 
 31-1-2025 [Coding] -
 I want task editing to be locked to one task until the task save button is hit.

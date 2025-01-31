@@ -29,12 +29,15 @@ public class TaskListPanel extends JFrame {
 
     private TaskListModel taskModel;
     private JPanel mainPanel;
-    private JPanel buttonPanel;
-    private Task currentEditingTask = null;  // Keep track of which task is being edited
-    private JTextArea currentEditingArea = null;  // Keep track of which text area is being edited
-    private JButton saveButton;  // The save button that will appear when editing
     private int frameWidth = 720;
     private int frameHeight = 900;
+
+    private JPanel buttonPanel;
+    private JButton saveButton;  // The save button that will appear when editing
+
+    private Task currentEditingTask = null;  // Keep track of which task is being edited
+    private JTextArea currentEditingArea = null;  // Keep track of which text area is being edited
+
     
     // Takes a list of tasks and displays them 
     public TaskListPanel(List<Task> tasks) {
@@ -120,7 +123,7 @@ public class TaskListPanel extends JFrame {
         descriptionArea.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                if (!descriptionArea.isEditable()) {  // Only respond if not already editing
+                if (!descriptionArea.isEditable()) {    // If the descriptionArea is not in editing mode.
                     startEditing(task, descriptionArea);
                 }
             }
@@ -192,7 +195,7 @@ public class TaskListPanel extends JFrame {
     private void startEditing(Task task, JTextArea area) {
         // If already editing something else, save it first
         if (currentEditingTask != null) {
-            saveTaskChanges();
+            saveTaskChanges();  // If you click into another descriptionArea the changes for the task will be saved.
         }
         
         // Set up new editing session
@@ -210,8 +213,8 @@ public class TaskListPanel extends JFrame {
     }
 
     private void saveTaskChanges() {
-        if (currentEditingTask != null && currentEditingArea != null) {
-            // Update the task's description
+        if (currentEditingTask != null && currentEditingArea != null) {  // Check state of any edits in progress
+            // Update the task's description by retrieving text from the editing area
             String newDescription = currentEditingArea.getText();
             currentEditingTask.setDescription(newDescription);  // You'll need to add this method to Task class
             
@@ -229,7 +232,7 @@ public class TaskListPanel extends JFrame {
             // Reset editing state
             currentEditingArea.setEditable(false);
             currentEditingArea.setBackground(null);  // Reset background color
-            buttonPanel.remove(saveButton);
+            buttonPanel.remove(saveButton);  // Remove button after saving
             buttonPanel.revalidate();
             buttonPanel.repaint();
             
