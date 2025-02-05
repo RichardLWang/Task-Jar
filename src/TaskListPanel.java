@@ -92,7 +92,7 @@ public class TaskListPanel extends JFrame {
         panel.setBorder(BorderFactory.createLineBorder(Color.GRAY));  // Visible border for the tasks
         
 
-        // METADATA PANEL (date, category, completion date)
+        // Metadata PANEL (date, category, completion date)
         JPanel metadataPanel = new JPanel();
         metadataPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
         // Format the metadata string
@@ -108,8 +108,8 @@ public class TaskListPanel extends JFrame {
         descriptionPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
         // Add description with word wrap
         JTextArea descriptionArea = new JTextArea(task.getDescription());
-        descriptionArea.setWrapStyleWord(true);
-        descriptionArea.setLineWrap(true);
+        descriptionArea.setWrapStyleWord(true);  // Ensures wrapping occurs at word boundaries, preventing words from being split.
+        descriptionArea.setLineWrap(true);  // Enables line wrapping so text doesn't extend beyond the JTextArea width.
         descriptionArea.setEditable(false);
         descriptionArea.setBackground(panel.getBackground());
 

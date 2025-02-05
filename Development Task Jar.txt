@@ -1,21 +1,16 @@
-31-1-2025 [Coding] -
-I've run into the dilemma of wanting every task to have a unique primary identifier. I've been recommended a Unix timestamp. 
-I reckon I should change the date completed to a unix timestamp. At this point I think this txt file might start becoming not human readable.
-It would be good to have these Unix timestamps because they can be used in the future indicate at which times tasks are created and completed.
-This looks good: 31-1-2025 [Coding] - <created:1706729400000> <completed:->
-Task description here.
-NAH I'm gonna be using 24 hour time. I still want the txt to be human readable or maybe I can keep using unix timestamps alongside 24hour?
+5-2-2025 [Coding] -
+
+
+5-2-2025 [Coding] -
+How to create a new task.
+
+4-2-2025 [Coding] -
+Restructure task meta data into new format:
+31-1-2025 [Coding] - 1706729400000 -
+Task description here
 
 31-1-2025 [Coding] -
 How are tasks sorted for display.
-
-31-1-2025 [Coding] 31-1-2025 
-How are tasks saved?
-1. descriptionArea has a mouse listener to see if the JTextArea is editable.
-2. The descriptionArea is set to be editable and the background colour changed to indicate that. The save button also appears. 
-3. Clicking off the descriptionArea or clicking the save button will trigger the saveTaskChanges() function. 
-4. I've discovered that the writeTasks() function completely overwrites the txt file with the copy from TaskListPanel. 
-I can't believe I dived this deep and finally the notion of having a unique primary identifier popped into my head as there's no way each task can be identified.
 
 31-1-2025 [Coding] -
 I want task editing to be locked to one task until the task save button is hit.
@@ -52,13 +47,39 @@ Maybe I can use width and height keywords like in Processing.
 WHat is a good design pattern for this program. MVVM (Model-View-ViewModel) apparently.
 
 1-1-2025 [Coding] -
-What is Java GUI. How to make it look like a smart phone app. It already looks the part. Actually taking it to a smartphone would be next level. Just check this task off when you accomplish I can't see beyond the inital text boxxxx argh. I'm typing th e blind Figure out how to add the checkbox for completion at the top right
+Checkbox for completion on the top right of the task panel.
 
 19-12-2024 [Coding] -
 Sub jars are a thought for the future.
 
 19-12-2024 [Coding] -
 What is the difference between a .txt and a .data file.
+
+4-2-2025 [Coding] 4-2-2025
+The identifying data for the tasks should only be read from the first line.
+It should only look for the meta data after an empty line and stop after the first line has been processed until an empty line is reached.
+
+31-1-2025 [Coding] 4-2-2025
+I've run into the dilemma of wanting every task to have a unique primary identifier. I've been recommended a Unix timestamp. 
+I reckon I should change the date completed to a unix timestamp. At this point I think this txt file might start becoming not human readable.
+It would be good to have these Unix timestamps because they can be used in the future indicate at which times tasks are created and completed.
+This looks good: 31-1-2025 [Coding] - <created:1706729400000> <completed:->
+Task description here.
+NAH I'm gonna be using 24 hour time. I still want the txt to be human readable or maybe I can keep using unix timestamps alongside 24hour?
+
+1-1-2025 [Coding] 4-2-2025
+What is Java GUI. How to make it look like a smart phone app. It already looks the part. 
+Actually taking it to a smartphone would be next level. 
+Just check this task off when you accomplish I can't see beyond the inital text boxxxx argh. 
+I'm typing th e blind. Word wrap causes any written text to be written on one line. Not really much of a problem since most txt editors can do horizontal word wrap.
+
+31-1-2025 [Coding] 31-1-2025 
+How are tasks saved?
+1. descriptionArea has a mouse listener to see if the JTextArea is editable.
+2. The descriptionArea is set to be editable and the background colour changed to indicate that. The save button also appears. 
+3. Clicking off the descriptionArea or clicking the save button will trigger the saveTaskChanges() function. 
+4. I've discovered that the writeTasks() function completely overwrites the txt file with the copy from TaskListPanel. 
+I can't believe I dived this deep and finally the notion of having a unique primary identifier popped into my head as there's no way each task can be identified.
 
 22-1-2025 [Coding] 24-1-2025
 There is an issue of sorting the 8-1-2025 good design pattern task. 
