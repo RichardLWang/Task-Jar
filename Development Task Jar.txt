@@ -10,7 +10,6 @@ It's basically much faster to append to the bottom and just display it in my pro
 5-2-2025 [Coding] -
 feaafeaefaefaefafeafeaefafe
 
-
 afefae
 
 5-2-2025 [Coding] -
@@ -147,4 +146,20 @@ Decide what can denote the null value for the Date Completed field. n/a is too h
 
 19-12-2024 [Coding] 20-12-2024
 Write out the test file.
+
+5-2-2025 [Coding] 5-2-2025
+Adding new tasks.
+At first I thought of adding new tasks to the txt file but to see them I would have to reread the file.
+Then I thought of the reverse way so that there's only one file operation. 
+I would just create a new Task first then add its task panel to the mainPanel so that it's displayed immediately.
+Saving it to the txt file comes later. 
+
+5-2-2025 [] -
+
+
+5-2-2025 [] -
+
+5-2-2025 [] -
+
+5-2-2025 [] -
 

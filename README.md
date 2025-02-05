@@ -1,6 +1,7 @@
 ## Task Jar and its objective
 
 This is my first java project to replace my current way of managing productivity which are just two txt files named TO DO and DONE.
+Each task shouldn't be longer than a paragraph because it's a task manager not a diary. 
 
 The improvements are:
 - Task tracking

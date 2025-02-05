@@ -78,6 +78,8 @@ public class TaskListPanel extends JFrame {
 
     private void displayTasks() {
         mainPanel.removeAll();
+
+        // It's gotta read the txt file again.
         for (Task task : taskModel.getTasks()) {
             JPanel taskPanel = createTaskPanel(task);
             taskPanel.setMaximumSize(new Dimension(frameWidth - 60, taskPanel.getMaximumSize().height));
@@ -187,7 +189,34 @@ public class TaskListPanel extends JFrame {
         newTaskButton.setFocusable(false); 
         newTaskButton.setFont(new Font("Comic Sans", Font.BOLD, 25));
         newTaskButton.setForeground(Color.magenta);
-        newTaskButton.addActionListener(e -> FileHandler.newTask());
+        newTaskButton.addActionListener(e -> {
+            try { 
+                Task newTask = new Task(new java.text.SimpleDateFormat("d-M-yyyy").format(new java.util.Date()), "Coding", "-", "");
+                // Create panel for new task
+                JPanel taskPanel = createTaskPanel(newTask);
+                taskPanel.setMaximumSize(new Dimension(frameWidth - 60, 
+                    taskPanel.getMaximumSize().height));
+
+                // Add to top of mainPanel
+                mainPanel.add(taskPanel, 0);
+                mainPanel.add(Box.createRigidArea(new Dimension(0, 10)), 1); 
+                
+                // Refresh display
+                mainPanel.revalidate();
+                mainPanel.repaint();
+                FileHandler.newTask();
+                // displayTasks();
+
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(
+                    this, 
+                    "Error creating new task: " + ex.getMessage(),
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE
+                );
+            }
+            
+        });
         return newTaskButton;
     }
     

@@ -71,15 +71,19 @@ public class FileHandler {
     }
 
     // Inserts new task at the top of the txt file. 
-    public static void newTask() {
+    public static void newTask() throws IOException {
         // Get the current date
         String date = new java.text.SimpleDateFormat("d-M-yyyy").format(new java.util.Date());
         // long unixTimestamp = System.currentTimeMillis();  // Unix TimeStamp to be used as primary identifier
         // Concatenate it onto " [] -"
         String taskHeader = new String(date + " [] -");
         System.out.println(taskHeader); // That line will then be followed by a new line.
-        // Both of these will be inserted at the bottom of the txt file. 
 
+        // Both of these will be inserted at the bottom of the txt file. 
+        try (PrintWriter writer = new PrintWriter(new FileWriter(DATA_DIR, true))) {
+            writer.println(taskHeader);
+            writer.println();  // Blank line between tasks
+        }
     }
     
 }
