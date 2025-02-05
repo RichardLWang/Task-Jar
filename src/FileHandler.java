@@ -9,9 +9,11 @@ import java.util.Scanner;
 
 public class FileHandler {
 
-    public static List<Task> readTasks(String filePath) throws FileNotFoundException {
+    private static final String DATA_DIR = "Development Task Jar.txt"; // Just the one txt file
+
+    public static List<Task> readTasks() throws FileNotFoundException {
         List<Task> tasks = new ArrayList<>();
-        Scanner scanner = new Scanner(new File(filePath));
+        Scanner scanner = new Scanner(new File(DATA_DIR));
                 
         StringBuilder taskHeader = new StringBuilder();
         String date = null;
@@ -56,6 +58,7 @@ public class FileHandler {
         return tasks;
     }
 
+    // This function currently overwrites all of the tasks. 
     public static void writeTasks(List<Task> tasks, String filePath) throws IOException {
         try (PrintWriter writer = new PrintWriter(new FileWriter(filePath))) {
             for (Task task : tasks) {
@@ -65,6 +68,18 @@ public class FileHandler {
                 writer.println();  // Blank line between tasks
             }
         }
+    }
+
+    // Inserts new task at the top of the txt file. 
+    public static void newTask() {
+        // Get the current date
+        String date = new java.text.SimpleDateFormat("d-M-yyyy").format(new java.util.Date());
+        // long unixTimestamp = System.currentTimeMillis();  // Unix TimeStamp to be used as primary identifier
+        // Concatenate it onto " [] -"
+        String taskHeader = new String(date + " [] -");
+        System.out.println(taskHeader); // That line will then be followed by a new line.
+        // Both of these will be inserted at the bottom of the txt file. 
+
     }
     
 }

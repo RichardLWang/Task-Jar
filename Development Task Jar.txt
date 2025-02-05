@@ -1,11 +1,27 @@
 5-2-2025 [Coding] -
+Create a new empty task with the new task button.
+It will consist of a date that is generated + a String consisting of " [] -".
+Followed by a new line.
+This new task will be inserted at the top of the txt file. 
+I learnt that computers read data like a scroll. From top to bottom. 
+Computers will read data sequentially similar to the early days of computing with rolls of punch cards. 
+It's basically much faster to append to the bottom and just display it in my program with the tasks in reverse.
 
+5-2-2025 [Coding] -
+feaafeaefaefaefafeafeaefafe
+
+
+afefae
 
 5-2-2025 [Coding] -
 How to create a new task.
 
 4-2-2025 [Coding] -
 Restructure task meta data into new format:
+31-1-2025 [Coding] - 1706729400000 -
+Task description here
+31-1-2025 [Coding] - 1706729400000 -
+Task description here
 31-1-2025 [Coding] - 1706729400000 -
 Task description here
 

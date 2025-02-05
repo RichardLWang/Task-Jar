@@ -42,6 +42,7 @@ public class TaskListPanel extends JFrame {
     // Takes a list of tasks and displays them 
     public TaskListPanel(List<Task> tasks) {
         taskModel = new TaskListModel(tasks);
+        taskModel.toggleFIFOLIFO(); // Set the order of the tasks within the constructor
 
         // Frame setup
         this.setTitle("Task Jar");
@@ -59,6 +60,8 @@ public class TaskListPanel extends JFrame {
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS)); // Use vertical BoxLayout to stack tasks
 
         buttonPanel = new JPanel(new FlowLayout(FlowLayout.LEFT)); // Buttons added to the left
+        buttonPanel.setBackground(Color.green);
+        buttonPanel.add(createNewTaskButton());
         buttonPanel.add(createTaskOrderToggleButton());
         saveButton = createSaveButton();
 
@@ -179,14 +182,20 @@ public class TaskListPanel extends JFrame {
         return buttonPanel;
     }
 
+    private JButton createNewTaskButton() {
+        JButton newTaskButton = new JButton("New Task");
+        newTaskButton.setFocusable(false); 
+        newTaskButton.setFont(new Font("Comic Sans", Font.BOLD, 25));
+        newTaskButton.setForeground(Color.magenta);
+        newTaskButton.addActionListener(e -> FileHandler.newTask());
+        return newTaskButton;
+    }
+    
     private JButton createSaveButton() {
         JButton saveButton = new JButton("Task Save");
         saveButton.setFocusable(false); 
         saveButton.setFont(new Font("Comic Sans", Font.BOLD, 25));
         saveButton.setForeground(Color.red);
-
-        buttonPanel.setBackground(Color.green);
-
         saveButton.addActionListener(e -> saveTaskChanges());
         return saveButton;
     }
