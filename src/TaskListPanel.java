@@ -59,8 +59,7 @@ public class TaskListPanel extends JFrame {
         mainPanel = new JPanel();
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS)); // Use vertical BoxLayout to stack tasks
 
-        buttonPanel = new JPanel(new FlowLayout(FlowLayout.LEFT)); // Buttons added to the left
-        buttonPanel.setBackground(Color.green);
+        buttonPanel = createButtonPanel();
         buttonPanel.add(createNewTaskButton());
         buttonPanel.add(createTaskOrderToggleButton());
         saveButton = createSaveButton();
@@ -70,8 +69,6 @@ public class TaskListPanel extends JFrame {
         this.add(createScrollPane(mainPanel)); // The default is already the centre of the border layout (scrollPane, BorderLayout.CENTER)?
         this.add(buttonPanel, BorderLayout.SOUTH);  // Button Panel goes on the south border.      
     }
-
-
 
 
     // FUNCTIONS
@@ -152,37 +149,32 @@ public class TaskListPanel extends JFrame {
         return scrollPane;
     }
 
+    private JPanel createButtonPanel() {
+        JPanel buttonPanel = new JPanel(); 
+        buttonPanel.setLayout(new FlowLayout(FlowLayout.RIGHT, 10, 0)); // Use FlowLayout's gap parameter. Component orientation (The components are added from the right)
+        buttonPanel.setBackground(Color.green);
+        buttonPanel.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10)); // Consistent padding
+        return buttonPanel;
+    }
 
-    
-    private JPanel createTaskOrderToggleButton() {
+    private JButton createTaskOrderToggleButton() {
         JButton taskOrderToggle = new JButton();
+        taskOrderToggle.setText("FIFO/LIFO");
+        taskOrderToggle.setFocusable(false); 
+        taskOrderToggle.setFont(new Font("Comic Sans",Font.BOLD,25));
+        taskOrderToggle.setForeground(Color.green);
 		// taskOrderToggle.setBounds(500, 500, 10, 10);  
 
         // Use a lambda instead of implementing Action Listener
         taskOrderToggle.addActionListener(e -> {
             taskModel.toggleFIFOLIFO();
             displayTasks();
+                            // // Refresh display
+                            // mainPanel.revalidate();
+                            // mainPanel.repaint();
         });
-
         // taskOrderToggle.setText(taskModel.isFIFO() ? "LIFO" : "FIFO");
-        taskOrderToggle.setText("FIFO/LIFO");
-        taskOrderToggle.setFocusable(false); 
-        taskOrderToggle.setFont(new Font("Comic Sans",Font.BOLD,25));
-        taskOrderToggle.setForeground(Color.green);
-
-        // Panel to hold taskOrderToggle button
-        JPanel buttonPanel = new JPanel(); 
-        buttonPanel.setLayout(new FlowLayout(FlowLayout.RIGHT, 0, 0)); // component orientation, horizontal gap, vertical gap
-        buttonPanel.setBackground(Color.green);
-
-        // Add some padding/margin on the right
-        buttonPanel.add(Box.createHorizontalStrut(10));  // Left margin
-        buttonPanel.add(taskOrderToggle);
-        buttonPanel.add(Box.createHorizontalStrut(10));  // Right margin
-        // Optional: add some vertical padding
-        buttonPanel.setBorder(BorderFactory.createEmptyBorder(5, 0, 5, 0));  // top, left, bottom, right
-
-        return buttonPanel;
+        return taskOrderToggle;
     }
 
     private JButton createNewTaskButton() {
