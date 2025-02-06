@@ -1,3 +1,12 @@
+6-2-2025 [Coding] -
+Patience. I wonder if this program is any slower on my home PC because the Macbook is way faster.
+
+6-2-2025 [Coding] -
+I can't edit a new task because saveTaskChanges seems to overwrite the txt file with a previous copy of the taskModel I think.
+
+6-2-2025 [Coding] -
+I don't think saving from TaskListPanel should be necessary. NOICE
+
 5-2-2025 [Coding] -
 Create a new empty task with the new task button.
 It will consist of a date that is generated + a String consisting of " [] -".
@@ -6,14 +15,6 @@ This new task will be inserted at the top of the txt file.
 I learnt that computers read data like a scroll. From top to bottom. 
 Computers will read data sequentially similar to the early days of computing with rolls of punch cards. 
 It's basically much faster to append to the bottom and just display it in my program with the tasks in reverse.
-
-5-2-2025 [Coding] -
-feaafeaefaefaefafeafeaefafe
-
-afefae
-
-5-2-2025 [Coding] -
-How to create a new task.
 
 4-2-2025 [Coding] -
 Restructure task meta data into new format:
@@ -69,6 +70,14 @@ Sub jars are a thought for the future.
 
 19-12-2024 [Coding] -
 What is the difference between a .txt and a .data file.
+
+5-2-2025 [Coding] 6-2-2025
+How to create a new task:
+Upon hitting the new Task button of TaskListPanel.
+A new task is created with default values.
+It is put into a task panel that is then added to the mainPanel.
+This task is then saved to both the taskModel and the txt file.
+The mainPanel is then refreshed to display it.
 
 4-2-2025 [Coding] 4-2-2025
 The identifying data for the tasks should only be read from the first line.
@@ -152,14 +161,5 @@ Adding new tasks.
 At first I thought of adding new tasks to the txt file but to see them I would have to reread the file.
 Then I thought of the reverse way so that there's only one file operation. 
 I would just create a new Task first then add its task panel to the mainPanel so that it's displayed immediately.
-Saving it to the txt file comes later. 
-
-5-2-2025 [] -
-
-
-5-2-2025 [] -
-
-5-2-2025 [] -
-
-5-2-2025 [] -
+Saving it to the txt file comes later.
 

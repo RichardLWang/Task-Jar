@@ -58,31 +58,14 @@ public class FileHandler {
         return tasks;
     }
 
-    // This function currently overwrites all of the tasks. 
-    public static void writeTasks(List<Task> tasks, String filePath) throws IOException {
-        try (PrintWriter writer = new PrintWriter(new FileWriter(filePath))) {
+    public static void writeTasks(List<Task> tasks) throws IOException {
+        try (PrintWriter writer = new PrintWriter(new FileWriter(DATA_DIR))) {
             for (Task task : tasks) {
                 String completionDate = task.getDateCompleted() == null ? "-" : task.getDateCompleted();
                 writer.printf("%s [%s] %s%n", task.getDate(), task.getCategory(), completionDate);
                 writer.println(task.getDescription());
                 writer.println();  // Blank line between tasks
             }
-        }
-    }
-
-    // Inserts new task at the top of the txt file. 
-    public static void newTask() throws IOException {
-        // Get the current date
-        String date = new java.text.SimpleDateFormat("d-M-yyyy").format(new java.util.Date());
-        // long unixTimestamp = System.currentTimeMillis();  // Unix TimeStamp to be used as primary identifier
-        // Concatenate it onto " [] -"
-        String taskHeader = new String(date + " [] -");
-        System.out.println(taskHeader); // That line will then be followed by a new line.
-
-        // Both of these will be inserted at the bottom of the txt file. 
-        try (PrintWriter writer = new PrintWriter(new FileWriter(DATA_DIR, true))) {
-            writer.println(taskHeader);
-            writer.println();  // Blank line between tasks
         }
     }
     

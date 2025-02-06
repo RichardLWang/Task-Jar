@@ -17,6 +17,13 @@ I want to keep on top of my yearly goals
 - Coding
 - Sport
 
+## What the buttons do
+New Task:
+Creates a new empty task within the UI by adding it to the taskModel copy but does not save it the changes to the txt file. 
+If you edit the description only then does it save the task to the txt file through TLP saveTaskChanges().
+
+FIFO
+
 
 ## Class organisation
 

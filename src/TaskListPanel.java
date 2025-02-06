@@ -68,7 +68,7 @@ public class TaskListPanel extends JFrame {
         displayTasks();
         
         this.add(createScrollPane(mainPanel)); // The default is already the centre of the border layout (scrollPane, BorderLayout.CENTER)?
-        this.add(buttonPanel, BorderLayout.SOUTH);  // Button Panel goes on the south border.         
+        this.add(buttonPanel, BorderLayout.SOUTH);  // Button Panel goes on the south border.      
     }
 
 
@@ -79,7 +79,6 @@ public class TaskListPanel extends JFrame {
     private void displayTasks() {
         mainPanel.removeAll();
 
-        // It's gotta read the txt file again.
         for (Task task : taskModel.getTasks()) {
             JPanel taskPanel = createTaskPanel(task);
             taskPanel.setMaximumSize(new Dimension(frameWidth - 60, taskPanel.getMaximumSize().height));
@@ -153,6 +152,8 @@ public class TaskListPanel extends JFrame {
         return scrollPane;
     }
 
+
+    
     private JPanel createTaskOrderToggleButton() {
         JButton taskOrderToggle = new JButton();
 		// taskOrderToggle.setBounds(500, 500, 10, 10);  
@@ -190,7 +191,6 @@ public class TaskListPanel extends JFrame {
         newTaskButton.setFont(new Font("Comic Sans", Font.BOLD, 25));
         newTaskButton.setForeground(Color.magenta);
         newTaskButton.addActionListener(e -> {
-            try { 
                 Task newTask = new Task(new java.text.SimpleDateFormat("d-M-yyyy").format(new java.util.Date()), "Coding", "-", "");
                 // Create panel for new task
                 JPanel taskPanel = createTaskPanel(newTask);
@@ -201,21 +201,11 @@ public class TaskListPanel extends JFrame {
                 mainPanel.add(taskPanel, 0);
                 mainPanel.add(Box.createRigidArea(new Dimension(0, 10)), 1); 
                 
+                taskModel.addTask(newTask);
+                
                 // Refresh display
                 mainPanel.revalidate();
                 mainPanel.repaint();
-                FileHandler.newTask();
-                // displayTasks();
-
-            } catch (IOException ex) {
-                JOptionPane.showMessageDialog(
-                    this, 
-                    "Error creating new task: " + ex.getMessage(),
-                    "Error",
-                    JOptionPane.ERROR_MESSAGE
-                );
-            }
-            
         });
         return newTaskButton;
     }
@@ -229,7 +219,6 @@ public class TaskListPanel extends JFrame {
         return saveButton;
     }
 
-    
     private void startEditing(Task task, JTextArea area) {
         // If already editing something else, save it first
         if (currentEditingTask != null) {
@@ -258,7 +247,7 @@ public class TaskListPanel extends JFrame {
             
             // Update the file
             try {
-                FileHandler.writeTasks(taskModel.getTasks(), "Development Task Jar.txt");
+                FileHandler.writeTasks(taskModel.getTasks());
             } catch (IOException ex) {
                 // Show error message to user
                 JOptionPane.showMessageDialog(this, 
