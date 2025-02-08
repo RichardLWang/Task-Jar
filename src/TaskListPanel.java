@@ -32,8 +32,12 @@ public class TaskListPanel extends JFrame {
     private int frameWidth = 720;
     private int frameHeight = 900;
 
+    // Why are these class variables instead of methods
     private JPanel buttonPanel;
-    private JButton saveButton;  // The save button that will appear when editing
+    // I wanna have button panels specific to specific procedures such as when editing a task or just on the mainPanel with the list. 
+    // private JPanel listButtonPanel;
+    // private JPanel taskButtonPanel;
+    private JButton saveButton; // The save button should be part of a task editing specific panel. It was so it can be accessed by another method.
 
     private Task currentEditingTask = null;  // Keep track of which task is being edited
     private JTextArea currentEditingArea = null;  // Keep track of which text area is being edited
@@ -91,7 +95,6 @@ public class TaskListPanel extends JFrame {
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         panel.setBorder(BorderFactory.createLineBorder(Color.GRAY));  // Visible border for the tasks
-        
 
         // Metadata PANEL (date, category, completion date)
         JPanel metadataPanel = new JPanel();
@@ -101,8 +104,11 @@ public class TaskListPanel extends JFrame {
         String metadata = String.format("%s [%s] %s", task.getDate(), task.getCategory(), completionDate);
         JLabel metadataLabel = new JLabel(metadata);
         metadataLabel.setFont(new Font("Arial", Font.BOLD, 16)); // Font name, style, size
-        metadataPanel.add(metadataLabel);
-        
+        metadataPanel.add(metadataLabel);    
+        // Change panel colour to indicate completion
+        if (task.getDateCompleted() != null) {
+            metadataPanel.setBackground(Color.GREEN);  
+        }
 
         // DESCRIPTION PANEL
         JPanel descriptionPanel = new JPanel();
@@ -133,7 +139,6 @@ public class TaskListPanel extends JFrame {
         // Add both panels
         panel.add(metadataPanel);
         panel.add(descriptionPanel);
-
         return panel;
     }
 
@@ -155,6 +160,12 @@ public class TaskListPanel extends JFrame {
         buttonPanel.setBackground(Color.green);
         buttonPanel.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10)); // Consistent padding
         return buttonPanel;
+    }
+
+    private JPanel createTaskButtonPanel() {
+        // Task save button to be a part of a panel when starting an edit
+        // Should I just add an action listener to the task panel so the whole task can be edited by buttons?
+        return null;
     }
 
     private JButton createTaskOrderToggleButton() {
