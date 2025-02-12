@@ -33,10 +33,8 @@ public class TaskListPanel extends JFrame {
     private int frameHeight = 900;
 
     // Why are these class variables instead of methods. So they can be accessed by other methods.
-    private JPanel buttonPanel;
     private JPanel listButtonPanel;
     private JPanel taskButtonPanel;  // The taskButton panel containing the save button will brought up when a task is clicked on to be edited.
-    private JButton saveButton; // The save button should be part of a task editing specific panel. It was so it can be accessed by another method.
 
     private Task currentEditingTask = null;  // Keep track of which task is being edited
     private JTextArea currentEditingArea = null;  // Keep track of which text area is being edited
@@ -63,8 +61,6 @@ public class TaskListPanel extends JFrame {
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS)); // Use vertical BoxLayout to stack tasks
 
         listButtonPanel = createListButtonPanel();
-
-        saveButton = createSaveButton();
 
         displayTasks();
         
@@ -163,9 +159,12 @@ public class TaskListPanel extends JFrame {
     }
 
     private JPanel createTaskButtonPanel() {
-        // Task save button to be a part of a panel when starting an edit
-        // Should I just add an action listener to the task panel so the whole task can be edited by buttons?
-        return null;
+        JPanel taskButtonPanel = new JPanel(); 
+        taskButtonPanel.setLayout(new FlowLayout(FlowLayout.RIGHT, 10, 0)); // Use FlowLayout's gap parameter. Component orientation (The components are added from the right)
+        taskButtonPanel.setBackground(Color.yellow);
+        taskButtonPanel.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10)); // Consistent padding
+        taskButtonPanel.add(createSaveButton());
+        return taskButtonPanel;
     }
 
     private JButton createTaskOrderToggleButton() {
@@ -233,13 +232,12 @@ public class TaskListPanel extends JFrame {
         currentEditingArea = area;
         area.setEditable(true);
         area.setBackground(new Color(255, 255, 200));  // Light yellow to indicate editing
-        
-        // Add save button if not already there
-        if (!Arrays.asList(buttonPanel.getComponents()).contains(saveButton)) {
-            buttonPanel.add(saveButton);
-            buttonPanel.revalidate();
-            buttonPanel.repaint();
-        }
+
+        this.remove(listButtonPanel);
+        taskButtonPanel = createTaskButtonPanel();
+        this.add(taskButtonPanel, BorderLayout.SOUTH);
+        this.revalidate();
+        this.repaint();
     }
 
     private void saveTaskChanges() {
@@ -262,10 +260,14 @@ public class TaskListPanel extends JFrame {
             // Reset editing state
             currentEditingArea.setEditable(false);
             currentEditingArea.setBackground(null);  // Reset background color
-            buttonPanel.remove(saveButton);  // Remove button after saving
-            buttonPanel.revalidate();
-            buttonPanel.repaint();
-            
+
+            // Remove task panel and restore list panel
+            this.remove(taskButtonPanel);
+            this.add(listButtonPanel, BorderLayout.SOUTH);
+            this.revalidate();
+            this.repaint();
+
+            taskButtonPanel = null; // Clear the reference
             currentEditingTask = null;
             currentEditingArea = null;
         }
