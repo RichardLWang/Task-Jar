@@ -64,8 +64,6 @@ public class TaskListPanel extends JFrame {
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS)); // Use vertical BoxLayout to stack tasks
 
         buttonPanel = createButtonPanel();
-        buttonPanel.add(createNewTaskButton());
-        buttonPanel.add(createTaskOrderToggleButton());
         saveButton = createSaveButton();
 
         displayTasks();
@@ -107,7 +105,7 @@ public class TaskListPanel extends JFrame {
         metadataPanel.add(metadataLabel);    
         // Change panel colour to indicate completion
         if (task.getDateCompleted() != null) {
-            metadataPanel.setBackground(Color.GREEN);  
+            metadataPanel.setBackground(Color.magenta);  
         }
 
         // DESCRIPTION PANEL
@@ -159,6 +157,8 @@ public class TaskListPanel extends JFrame {
         buttonPanel.setLayout(new FlowLayout(FlowLayout.RIGHT, 10, 0)); // Use FlowLayout's gap parameter. Component orientation (The components are added from the right)
         buttonPanel.setBackground(Color.green);
         buttonPanel.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10)); // Consistent padding
+        buttonPanel.add(createNewTaskButton());
+        buttonPanel.add(createTaskOrderToggleButton());
         return buttonPanel;
     }
 
@@ -194,7 +194,7 @@ public class TaskListPanel extends JFrame {
         newTaskButton.setFont(new Font("Comic Sans", Font.BOLD, 25));
         newTaskButton.setForeground(Color.magenta);
         newTaskButton.addActionListener(e -> {
-                Task newTask = new Task(new java.text.SimpleDateFormat("d-M-yyyy").format(new java.util.Date()), "Coding", "-", "");
+                Task newTask = new Task(new java.text.SimpleDateFormat("d-M-yyyy").format(new java.util.Date()), "Coding", null, "");
                 // Create panel for new task
                 JPanel taskPanel = createTaskPanel(newTask);
                 taskPanel.setMaximumSize(new Dimension(frameWidth - 60, 
