@@ -32,11 +32,10 @@ public class TaskListPanel extends JFrame {
     private int frameWidth = 720;
     private int frameHeight = 900;
 
-    // Why are these class variables instead of methods
+    // Why are these class variables instead of methods. So they can be accessed by other methods.
     private JPanel buttonPanel;
-    // I wanna have button panels specific to specific procedures such as when editing a task or just on the mainPanel with the list. 
-    // private JPanel listButtonPanel;
-    // private JPanel taskButtonPanel;
+    private JPanel listButtonPanel;
+    private JPanel taskButtonPanel;  // The taskButton panel containing the save button will brought up when a task is clicked on to be edited.
     private JButton saveButton; // The save button should be part of a task editing specific panel. It was so it can be accessed by another method.
 
     private Task currentEditingTask = null;  // Keep track of which task is being edited
@@ -63,13 +62,14 @@ public class TaskListPanel extends JFrame {
         mainPanel = new JPanel();
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS)); // Use vertical BoxLayout to stack tasks
 
-        buttonPanel = createButtonPanel();
+        listButtonPanel = createListButtonPanel();
+
         saveButton = createSaveButton();
 
         displayTasks();
         
         this.add(createScrollPane(mainPanel)); // The default is already the centre of the border layout (scrollPane, BorderLayout.CENTER)?
-        this.add(buttonPanel, BorderLayout.SOUTH);  // Button Panel goes on the south border.      
+        this.add(listButtonPanel, BorderLayout.SOUTH);  // Button Panel goes on the south border.      
     }
 
 
@@ -152,14 +152,14 @@ public class TaskListPanel extends JFrame {
         return scrollPane;
     }
 
-    private JPanel createButtonPanel() {
-        JPanel buttonPanel = new JPanel(); 
-        buttonPanel.setLayout(new FlowLayout(FlowLayout.RIGHT, 10, 0)); // Use FlowLayout's gap parameter. Component orientation (The components are added from the right)
-        buttonPanel.setBackground(Color.green);
-        buttonPanel.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10)); // Consistent padding
-        buttonPanel.add(createNewTaskButton());
-        buttonPanel.add(createTaskOrderToggleButton());
-        return buttonPanel;
+    private JPanel createListButtonPanel() {
+        JPanel listButtonPanel = new JPanel(); 
+        listButtonPanel.setLayout(new FlowLayout(FlowLayout.RIGHT, 10, 0)); // Use FlowLayout's gap parameter. Component orientation (The components are added from the right)
+        listButtonPanel.setBackground(Color.green);
+        listButtonPanel.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10)); // Consistent padding
+        listButtonPanel.add(createNewTaskButton());
+        listButtonPanel.add(createTaskOrderToggleButton());
+        return listButtonPanel;
     }
 
     private JPanel createTaskButtonPanel() {
