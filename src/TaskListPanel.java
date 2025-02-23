@@ -19,6 +19,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.SwingUtilities;
 import javax.swing.border.Border;
 
 import javax.swing.JLabel;
@@ -33,6 +34,7 @@ public class TaskListPanel extends JFrame {
     private int frameHeight = 900;
 
     // Why are these class variables instead of methods. So they can be accessed by other methods.
+    private JScrollPane scrollPane;
     private JPanel listButtonPanel;
     private JPanel taskButtonPanel;  // The taskButton panel containing the save button will brought up when a task is clicked on to be edited.
 
@@ -65,6 +67,8 @@ public class TaskListPanel extends JFrame {
         displayTasks();
         
         this.add(createScrollPane(mainPanel)); // The default is already the centre of the border layout (scrollPane, BorderLayout.CENTER)?
+        scrollPane = createScrollPane(mainPanel);
+        this.add(scrollPane);
         this.add(listButtonPanel, BorderLayout.SOUTH);  // Button Panel goes on the south border.      
     }
 
@@ -164,6 +168,7 @@ public class TaskListPanel extends JFrame {
         taskButtonPanel.setBackground(Color.yellow);
         taskButtonPanel.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10)); // Consistent padding
         taskButtonPanel.add(createSaveButton());
+        taskButtonPanel.add(createFinishButton());
         return taskButtonPanel;
     }
 
@@ -213,12 +218,28 @@ public class TaskListPanel extends JFrame {
     }
     
     private JButton createSaveButton() {
-        JButton saveButton = new JButton("Task Save");
+        JButton saveButton = new JButton("Save");
         saveButton.setFocusable(false); 
         saveButton.setFont(new Font("Comic Sans", Font.BOLD, 25));
         saveButton.setForeground(Color.red);
         saveButton.addActionListener(e -> saveTaskChanges());
         return saveButton;
+    }
+
+    private JButton createFinishButton() {
+        JButton finishButton = new JButton("Finish");
+        finishButton.setFocusable(false); 
+        finishButton.setFont(new Font("Comic Sans", Font.BOLD, 25));
+        finishButton.setForeground(Color.red);
+        finishButton.addActionListener(e -> {
+            currentEditingTask.setDateCompleted(new java.text.SimpleDateFormat("d-M-yyyy").format(new java.util.Date()));
+            saveTaskChanges();
+            displayTasks();
+            SwingUtilities.invokeLater(() -> {
+                scrollPane.getVerticalScrollBar().setValue(0);
+            });
+        });
+        return finishButton;
     }
 
     private void startEditing(Task task, JTextArea area) {

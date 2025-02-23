@@ -20,6 +20,8 @@ public class Task {
     public String getDescription() {return description;}
 
     public void setDescription(String description) {this.description = description;}
+
+    public void setDateCompleted(String dateCompleted) {this.dateCompleted = dateCompleted;}
     
     public String toString() {
         String completionDate = (dateCompleted == null) ? "NOT COMPLETE" : dateCompleted;

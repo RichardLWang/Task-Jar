@@ -1,62 +1,46 @@
-12-2-2025 [Coding] -
-Aye it works great
+23-2-2025 [Coding] 23-2-2025
+I made the scroll pane an instance variable of the TaskListPanel so I can reset the position of the scroll pane after the mainPanel gets filled up with tasks. 
 
-19-12-2024 [Coding] -
-What is the difference between a .txt and a .data file.
+8-2-2025 [Coding] 23-2-2025
+It might be better to have a button panel specific to task edits instead of cramming all the buttons into the task panel. There's no need to reorder all the tasks when editing a task. The task in the edit mode would just disappear then.
 
-19-12-2024 [Coding] -
-Sub jars are a thought for the future.
+6-2-2025 [Coding] 23-2-2025
+I can't edit a new task because saveTaskChanges seems to overwrite the txt file with a previous copy of the taskModel I think. I was trying to edit the task directly instead of editing the copy. The task is added to the taskModel.
 
-1-1-2025 [Coding] -
-Checkbox for completion on the top right of the task panel.
+6-2-2025 [Coding] -
+I don't think saving from TaskListPanel should be necessary.
 
-8-1-2025 [Coding] -
-WHat is a good design pattern for this program. MVVM (Model-View-ViewModel) apparently.
+31-1-2025 [Coding] 23-2-2025
+How are tasks sorted for display. If a task is saved (overwrites the entire txt) after the FIFO/LIFO button is hit then the order within the taskModel will be saved as is onto the txt. You'll have to hit the FIFO/LIFO button the sort the taskModel copy for display then save it as it onto the txt file. The initial display upon Task Jar's startup will be that of the txt's last state. 
 
-11-1-2025 [Coding] -
-Font size should be made a variable so that the size of the description area can be multipled by it so that the description can fit in the box.
-Maybe I can use width and height keywords like in Processing.
+28-1-2025 [Coding] 23-2-2025
+The tasks within the txt file are being saved by the order of the FIFO/LIFO button. I don't think it should be saved like this for performance reasons. Performance wise it actually doesn't matter because the txt gets read sequentially, same as the copy within the taskModel. 
 
-15-1-2025 [Coding] -
-Tasks without a Date Completed should be sorted to the top. These tasks without a completion date can be sorted via a LIFO (Recent Tasks) / FIFO (Late Tasks) button. 
-The uncompleted tasks should be sorted by date. 
-A JPanel with a flow layout holds the button in the south border of the main panel.
-
-22-1-2025 [Coding] -
-Checkbox for task completion to be placed on the top right of the task panel.
-Upon clicking it a completion date will be generated for the task.
-Completed tasks should get their backgrounds coloured.
+28-1-2025 [Coding] 23-2-2025
+Task description editing is not to my liking.
+The area is not expanding down as I type so I can't see what I'm typing on the lines further down. 
+Nah it's to my liking now because it's simple. Just keep it to the box. It's not a diary.
 
 22-1-2025 [Coding] -
 - Look at the structure of MileStone 2 and adapt to my Task Catergory Counter program
 - Creating Task Jar will allow me to see my progress. The TaskListModel class will allow for these manipulations.
 
-24-1-2025 [Coding] -
-Figure out how to start editing tasks. Checkbox for completion and task description edit. Why is the area of this task so big?
+15-1-2025 [Coding] 23-2-2025
+Tasks without a Date Completed should be sorted to the top. These tasks without a completion date can be sorted via a LIFO (Recent Tasks) / FIFO (Late Tasks) button. 
+The uncompleted tasks should be sorted by date. 
+A JPanel with a flow layout holds the button in the south border of the main panel.
 
-28-1-2025 [Coding] -
-Task description editing is not to my liking.
-The area is not expanding down as I type so I can't see what I'm typing on the lines further down.
+11-1-2025 [Coding] -
+Font size should be made a variable so that the size of the description area can be multipled by it so that the description can fit in the box.
+Maybe I can use width and height keywords like in Processing.
 
-28-1-2025 [Coding] -
-The tasks within the txt file are being saved by the order of the FIFO/LIFO button. I don't think it should be saved like this for performance reasons.
+8-1-2025 [Coding] -
+WHat is a good design pattern for this program. MVVM (Model-View-ViewModel) apparently.
 
-31-1-2025 [Coding] -
-I want task editing to be locked to one task until the task save button is hit.
+19-12-2024 [Coding] -
+Sub jars are a thought for the future.
 
-31-1-2025 [Coding] -
-How are tasks sorted for display.
-
-4-2-2025 [Coding] -
-Restructure task meta data into new format:
-31-1-2025 [Coding] - 1706729400000 -
-Task description here
-31-1-2025 [Coding] - 1706729400000 -
-Task description here
-31-1-2025 [Coding] - 1706729400000 -
-Task description here
-
-5-2-2025 [Coding] -
+5-2-2025 [Coding] 23-2-2025
 Create a new empty task with the new task button.
 It will consist of a date that is generated + a String consisting of " [] -".
 Followed by a new line.
@@ -65,20 +49,43 @@ I learnt that computers read data like a scroll. From top to bottom.
 Computers will read data sequentially similar to the early days of computing with rolls of punch cards. 
 It's basically much faster to append to the bottom and just display it in my program with the tasks in reverse.
 
-6-2-2025 [Coding] -
-I don't think saving from TaskListPanel should be necessary.
+6-2-2025 [Coding] 23-2-2025
+Patience. I wonder if this program is any slower on my home PC because the Macbook is way faster. Nah it's just as speedy suprisingly.
 
-6-2-2025 [Coding] -
-I can't edit a new task because saveTaskChanges seems to overwrite the txt file with a previous copy of the taskModel I think.
+22-1-2025 [Coding] 23-2-2025
+Checkbox for task completion to be placed on the top right of the task panel.
+(Nah I think it's cleaner to keep all the functionality in a panel.)
+Upon clicking it a completion date will be generated for the task. Yes
+Completed tasks should get their backgrounds coloured.
+(I just colour the header for easier readability.)
 
-6-2-2025 [Coding] -
-Patience. I wonder if this program is any slower on my home PC because the Macbook is way faster.
-
-8-2-2025 [Coding] -
-It might be better to have a button panel specific to task edits instead of cramming all the buttons into the task panel. There's no need to reorder all the tasks when editing a task. The task in the edit mode would just disappear then.
-
-12-2-2025 [Coding] -
+12-2-2025 [Coding] 23-2-2025
 Why is the header green it's not complete. createNewTaskButton() wasn't creating the task with a null value.
+
+4-2-2025 [Coding] 23-2-2025
+I moved on from trying to assign primary keys to each task because that would require a database of sorts be too much overhead for a simple human readable text file.
+Restructure task meta data into new format:
+31-1-2025 [Coding] - 1706729400000 -
+Task description here
+31-1-2025 [Coding] - 1706729400000 -
+Task description here
+31-1-2025 [Coding] - 1706729400000 -
+Task description here
+
+12-2-2025 [Coding] 23-2-2025
+Aye it works great
+
+24-1-2025 [Coding] 23-2-2025
+Figure out how to start editing tasks. Checkbox for completion and task description edit. Why is the area of this task so big?
+
+31-1-2025 [Coding] 23-2-2025
+I want task editing to be locked to one task until the task save button is hit. Nah clicking off into another task saves it. It's nice.
+
+1-1-2025 [Coding] 23-2-2025
+Added finish button for the task editing button panel.
+
+19-12-2024 [Coding] 23-2-2025
+What is the difference between a .txt and a .data file. Txt is human readable and data is structured for machine readable.
 
 8-2-2025 [Coding] 8-2-2025
 Change task colour of completed tasks.
