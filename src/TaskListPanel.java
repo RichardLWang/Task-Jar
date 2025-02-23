@@ -77,14 +77,12 @@ public class TaskListPanel extends JFrame {
 
     private void displayTasks() {
         mainPanel.removeAll();
-
         for (Task task : taskModel.getTasks()) {
             JPanel taskPanel = createTaskPanel(task);
             taskPanel.setMaximumSize(new Dimension(frameWidth - 60, taskPanel.getMaximumSize().height));
             mainPanel.add(taskPanel);
             mainPanel.add(Box.createRigidArea(new Dimension(0, 10)));
         }
-        
         mainPanel.revalidate();
         mainPanel.repaint();
     }

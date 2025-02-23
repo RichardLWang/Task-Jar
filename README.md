@@ -1,80 +1,45 @@
-## Task Jar and its objective
+# Task Jar
 
-This is my first java project to replace my current way of managing productivity which are just two txt files named TO DO and DONE.
-Each task shouldn't be longer than a paragraph because it's a task manager not a diary. 
+A simple Java-based task management system designed to replace basic text file todo lists with a user-friendly GUI interface while maintaining human-readable storage.
 
-The improvements are:
-- Task tracking
-- Organisation
-- Backups (Imagine accidentally deleting the whole thing and saving it) I guess I'm implementing some sort of version control.
+## Table of Contents
+- [Features](#features)
+- [Getting Started](#getting-started)
+- [Usage](#usage)
+- [File Format](#file-format)
+- [Categories](#categories)
+- [Technical Details](#technical-details)
 
-I want to keep on top of my yearly goals
+## Features
+- Task tracking with dates and categories
+- Simple GUI interface
+- Human-readable and editable storage format
+- Task organization (FIFO/LIFO ordering)
+- Completion tracking
+- Built-in task categorization
 
-- Academic Study
-- Workout
-- Home
-- MoodLamp
-- Coding
-- Sport
+## Getting Started
+1. Clone the repository
+2. Run App.java
+3. Tasks are stored in "Development Task Jar.txt"
 
-## What the buttons do
-New Task:
-Creates a new empty task within the UI by adding it to the taskModel copy but does not save it the changes to the txt file. 
-If you edit the description only then does it save the task to the txt file through TLP saveTaskChanges().
+## Usage
 
-FIFO
+### Controls
+- **New Task**: Creates a blank task at the top of the list
+- **FIFO/LIFO**: Toggles task ordering
 
+- **Click Task**: Opens task for editing
+- **Save**: Saves changes to current task
+- **Finish**: Marks task as complete with current date
 
-## Class organisation
+## File Format
 
-FileHandler -> Task -> TaskListModel -> TaskListPanel -> App
+Tasks are stored in a human-readable text format:
 
-## Task Jar txt File Rules
+```txt
+31-1-2025 [Coding] -
+Make a Task Entry.
 
-The txt file is intended to be human readable and also editable.
-
-It would consist of the following:
-
-12-12-2024 [Jar] 20-12-2024 1706729400000 1703894400000
-Make a Task Entry. 
-
-The task header consists of
-Date, Jar, Date Completed, Date(Unix Timestamp), Date Completed (Unix Timestamp)
-
-The task description is on the next line.
-
-A blank line then separates the tasks. 
-After the blank line another task entry can be added. 
-
-(I thought about Y2K and found out that Unix time will overflow at 03:14:07 UTC on January 19, 2038,
-hopefully there will be a Task Jar 2 by then.)
-
-## Task Header Field Rules 
-
-Example Task header
-31-1-2025 [Coding] - 1706729400000 -
-
-     DATE
-Is mandatory in the format DD-MM-YYYY or D-M-YYYY.
-0s in front of the dates are not included. 
-
-ALL FIELDS AFTER ARE SEPARATED BY ONE WHITESPACE BETWEEN THEM. 
-
-     JAR
-The 'Jar' or Task Category MUST be surrounded by square brackets. []
-The task category container can also be empty.  
-(When empty, the 'Jar' it will be uncategorised.)
-e.g [Task Category]  OR  []
-
-     DATE COMPLETED
-Either in the same format as the DATE field OR
--
-a single dash with NOTHING after it to indicate a null value.
-
-     DATE in Unix Timestamp format (Unique primary identifier for the tasks)
-This is mandatory and is created when a task is created. No two of these unix timestamps will be the same. 
-
-     DATE COMPLETED in Unix Timestamp format
-A single dash indicates that the value is null.
--
-Upon hitting a checkbox in the GUI a Unix Timestamp will be generated for this field and a DD-MM-YYYY will be passed to the DATE COMPLETED field. 
+12-12-2024 [Exercise] 20-12-2024
+Complete workout routine.
